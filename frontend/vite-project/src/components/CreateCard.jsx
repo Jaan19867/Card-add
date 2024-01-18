@@ -2,6 +2,7 @@ import React from "react"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Input from "./Input"
+import { Card } from "./Card"
 
 function CreateCard() {
   const [name, setName] = useState("")
@@ -12,18 +13,17 @@ function CreateCard() {
     "https://avatars.githubusercontent.com/u/9919?s=280&v=4"
   )
 
-  useEffect( async () => {
-    if (gituser) {
-        await fetch(`https://api.github.com/users/${gituser}`)
-        .then((response) => 
+  useEffect( () => {
 
-          response.json()
-          
-        )
-        .then((data) => {
-          console.log(data)
-          setImgUrl(data.avatar_url)
-        })
+
+    if (gituser) {
+      const fetchData=async ()=>{
+        const response = await fetch(`https://api.github.com/users/${gituser}`)
+        const newData=await response.json();
+        console.log(newData);
+        setImgUrl(newData.avatar_url)
+      }
+        fetchData()
        
     }
   }, [gituser])
@@ -39,14 +39,19 @@ function CreateCard() {
       gituser == "" ||
       imgUrl === ""
     )
+    console.log(card)
       await fetch("http://localhost:3000/cardpost", {
         method: "POST",
-        body: JSON.stringify({ card }),
+        body: JSON.stringify( card ),
         headers: { "Content-type": "application/json" },
+        
       })
         .then((response) => response.text())
-        .then((data) => console.log(data))
-    navigate("/")
+        .then((data) => console.log(data)
+        
+        
+        )
+    navigate("/card")
   }
 
   return (
@@ -90,10 +95,11 @@ function CreateCard() {
             type="button"
             className="w-full inline-flex bg-black justify-center items-center rounded-xl px-3 py-4 text-sm font-semibold text-white hover:bg-[#111930]"
           >
-Add Your E-Card 
-
-
+            Add Your E-Card
           </button>
+        </div>
+        <div className="flex justify-center w-[600px] rounded-lg">
+          <Card card={card} />
         </div>
       </div>
     </div>

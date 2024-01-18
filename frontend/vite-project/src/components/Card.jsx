@@ -26,7 +26,7 @@ export function Card({ card }) {
             {description}
           </div>
           <div className="text-md text-slate-300">
-            <b className="text-sm">Interests:</b> {age}
+            <b className="text-sm">Age:</b> {age}
           </div>
         </div>
       </div>
