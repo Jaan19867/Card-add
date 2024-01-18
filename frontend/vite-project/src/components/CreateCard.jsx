@@ -38,20 +38,19 @@ function CreateCard() {
       age === "" ||
       gituser == "" ||
       imgUrl === ""
-    )
-    console.log(card)
+    ){
+      console.log(card)
       await fetch("http://localhost:3000/cardpost", {
         method: "POST",
-        body: JSON.stringify( card ),
+        body: JSON.stringify(card),
         headers: { "Content-type": "application/json" },
-        
       })
         .then((response) => response.text())
-        .then((data) => console.log(data)
-        
-        
-        )
-    navigate("/card")
+        .then((data) => console.log(data))
+      navigate("/")
+
+    }
+    
   }
 
   return (
