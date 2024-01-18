@@ -16,7 +16,7 @@ const router=createBrowserRouter(
 
    createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
-         <Route path='/card' element={<App/>}/>
+         <Route path='card' element={<App/>}/>
          <Route path='create' element={<CreateCard/>}/>
     </Route>
    )
