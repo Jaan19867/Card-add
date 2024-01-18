@@ -8,7 +8,7 @@ function CreateCard() {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [age, setAge] = useState("")
-  const [gituser, setGitUser] = useState("")
+  const [gitUser, setGitUser] = useState("")
   const [imgUrl, setImgUrl] = useState(
     "https://avatars.githubusercontent.com/u/9919?s=280&v=4"
   )
@@ -16,19 +16,19 @@ function CreateCard() {
   useEffect( () => {
 
 
-    if (gituser) {
+    if (gitUser) {
       const fetchData=async ()=>{
-        const response = await fetch(`https://api.github.com/users/${gituser}`)
+        const response = await fetch(`https://api.github.com/users/${gitUser}`)
         const newData=await response.json();
-        console.log(newData);
+       
         setImgUrl(newData.avatar_url)
       }
         fetchData()
        
     }
-  }, [gituser])
+  }, [gitUser])
 
-  const card = { name, description, age, gituser, imgUrl }
+  const card = { name, description, age, gitUser, imgUrl }
   const navigate = useNavigate()
 
   const submitCard = async () => {
@@ -36,20 +36,22 @@ function CreateCard() {
       name === "" ||
       description === "" ||
       age === "" ||
-      gituser == "" ||
+      gitUser == "" ||
       imgUrl === ""
-    ){
-      console.log(card)
+    ){alert("Your input is wrong ") }
+    else{
+      console.log({card})
       await fetch("http://localhost:3000/cardpost", {
         method: "POST",
-        body: JSON.stringify(card),
+        body: JSON.stringify({card}),
         headers: { "Content-type": "application/json" },
       })
         .then((response) => response.text())
         .then((data) => console.log(data))
-      navigate("/")
+      navigate("/card")
 
     }
+    
     
   }
 
@@ -82,12 +84,11 @@ function CreateCard() {
             <Input
               type="text"
               placeholder="Your github username... (card image will be same as github avatar)"
-              value={gituser}
+              value={gitUser}
               handleChange={(e) => setGitUser(e.target.value)}
             />
           </div>
         </div>
-
         <div className="flex justify-center">
           <button
             onClick={() => submitCard()}
@@ -96,7 +97,8 @@ function CreateCard() {
           >
             Add Your E-Card
           </button>
-        </div>
+        </div>{" "}
+        console.log(newData);
         <div className="flex justify-center w-[600px] rounded-lg">
           <Card card={card} />
         </div>
