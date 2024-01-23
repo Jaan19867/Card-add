@@ -48,7 +48,7 @@ function CreateCard() {
       })
         .then((response) => response.text())
         .then((data) => console.log(data))
-      navigate("/card")
+      navigate("/")
 
     }
     
@@ -98,7 +98,7 @@ function CreateCard() {
             Add Your E-Card
           </button>
         </div>{" "}
-        console.log(newData);
+      
         <div className="flex justify-center w-[600px] rounded-lg">
           <Card card={card} />
         </div>
