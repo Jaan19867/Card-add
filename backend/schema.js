@@ -9,6 +9,12 @@ const Card_Zod_Schema = zod.object({
   description: zod.string(),
   gitUser: zod.string(),
   imgUrl: zod.string(),
+  socials:zod.array(zod.object({
+social:zod.string(),
+url:zod.string(),
+id:zod.string()
+
+  }))
   
 
 })

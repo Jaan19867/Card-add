@@ -16,6 +16,12 @@ const cardSchema = new mongoose.Schema({
   description: String,
   gitUser: String,
   imgUrl: String,
+  socials:[
+    {
+      social:String,
+      url:String 
+    }
+  ]
  
 })
 

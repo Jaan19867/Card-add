@@ -1,6 +1,14 @@
-export function Card({ card }) {
-  const { name,age, description, gitUser, imgUrl } = card
+import SocialsButton from "./SocialsButton"
 
+export function Card({ card }) {
+  const { name,age, description, gitUser, imgUrl,socials } = card
+const socialButtons=socials.map((social)=>{
+  return (
+    <SocialsButton key={social.id}>
+      <a href={social.url}>{social.social}</a>
+    </SocialsButton>
+  )
+})
   return (
     <>
       <div className="flex font-sans w-[500px] shadow-lg rounded-xl ml-5 mt-5 bg-slate-800">
@@ -27,6 +35,9 @@ export function Card({ card }) {
           </div>
           <div className="text-md text-slate-300">
             <b className="text-sm">Age:</b> {age}
+          </div>
+          <div className="flex-wrap">
+            {socialButtons}
           </div>
         </div>
       </div>
